@@ -1,5 +1,6 @@
 import { BreadcrumbList, ListItem, WithContext } from "schema-dts";
 import { BreadcrumbItem } from "../types";
+import { validateAbsolutePath } from "./validation";
 
 /**
  * Generates a Schema.org BreadcrumbList representation from an array of BreadcrumbItem.
@@ -31,6 +32,8 @@ const convertBreadcrumbsToStructuredData = (
   let baseUrl: string | undefined;
 
   return breadcrumbs.map((item, index) => {
+    validateAbsolutePath(item.url, index);
+
     if (index === 0) baseUrl = item.url;
     else if (baseUrl && !item.url.startsWith(baseUrl)) {
       throw new Error(

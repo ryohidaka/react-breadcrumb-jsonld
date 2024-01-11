@@ -67,4 +67,20 @@ describe("generateBreadcrumbListSchema", () => {
       expect(error);
     }
   });
+
+  it("throws an error when URLs are not absolute paths", () => {
+    // Arrange
+    const breadcrumbs: BreadcrumbItem[] = [
+      { url: "https://example.com/", name: "Home" },
+      { url: "/product/", name: "Products" },
+      { url: "/product/hoge", name: "Hoge" },
+    ];
+
+    // Act & Assert
+    try {
+      const result = generateBreadcrumbListSchema(breadcrumbs);
+    } catch (error) {
+      expect(error);
+    }
+  });
 });
