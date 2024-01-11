@@ -28,7 +28,18 @@ export const generateBreadcrumbListSchema = (
 const convertBreadcrumbsToStructuredData = (
   breadcrumbs: BreadcrumbItem[],
 ): ListItem[] => {
+  let baseUrl: string | undefined;
+
   return breadcrumbs.map((item, index) => {
+    if (index === 0) baseUrl = item.url;
+    else if (baseUrl && !item.url.startsWith(baseUrl)) {
+      throw new Error(
+        `Invalid breadcrumb at position ${index + 1}: ${
+          item.url
+        } is not nested under ${baseUrl}`,
+      );
+    }
+
     return {
       "@type": "ListItem",
       position: index + 1,

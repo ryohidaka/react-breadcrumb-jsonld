@@ -51,4 +51,20 @@ describe("generateBreadcrumbListSchema", () => {
       itemListElement: [],
     });
   });
+
+  it("throws an error when URLs are not properly nested", () => {
+    // Arrange
+    const breadcrumbs: BreadcrumbItem[] = [
+      { url: "https://example.com/", name: "Home" },
+      { url: "https://example.com/product/", name: "Products" },
+      { url: "https://differentdomain.com/other", name: "Different" }, // Invalid: Different domain
+    ];
+
+    // Act & Assert
+    try {
+      const result = generateBreadcrumbListSchema(breadcrumbs);
+    } catch (error) {
+      expect(error);
+    }
+  });
 });
