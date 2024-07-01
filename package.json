@@ -1,6 +1,6 @@
 {
   "name": "react-breadcrumbs-jsonld",
-  "version": "0.1.21",
+  "version": "0.1.22",
   "description": "Dynamically generates JSON-LD structured for breadcrumbs in React.",
   "keywords": [
     "react",
